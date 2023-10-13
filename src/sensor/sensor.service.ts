@@ -33,6 +33,27 @@ export class SensorService {
     });
   }
 
+  async getSensorById(id: number) {
+    const sensor = await this.prismaService.sensor.findUnique({
+      where: {
+        id: +id,
+      },
+      include: {
+        measures: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+        },
+      },
+    });
+
+    if (!sensor) {
+      throw new Error('Sensor not found');
+    }
+
+    return sensor;
+  }
+
   async measureSensor(data: CreateMeasurementDTO, id: number) {
     console.log(data, id);
     const sensor = await this.prismaService.sensor.findUnique({

@@ -17,6 +17,11 @@ export class SensorController {
     return this.sensorsService.getAllSensors();
   }
 
+  @Get('/:id')
+  async getSensorById(@Param('id') id: number) {
+    return this.sensorsService.getSensorById(id);
+  }
+
   @Post('/measurement/:id')
   async measureSensor(
     @Param('id') id: number,
