@@ -21,7 +21,6 @@ export class SensorService {
     return this.prismaService.sensor.findMany({
       include: {
         measures: {
-          take: 1,
           orderBy: {
             createdAt: 'desc',
           },
